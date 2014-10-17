@@ -81,12 +81,7 @@ func Report(r metrics.Registry, d time.Duration, riemannHost string) {
 
 // Establishes a Riemann connection, will block (and retry) until
 // it can successfully establish a connection.
-func RiemannConnect(riemannHost string) *raidman.Client {
-	ch := establishRiemannClient(riemannHost)
-	return <-ch
-}
-
-func establishRiemannClient(host string) chan *raidman.Client {
+func RiemannConnect(host string) *raidman.Client {
 	connChannel := make(chan *raidman.Client)
 
 	go func() {
@@ -106,7 +101,7 @@ func establishRiemannClient(host string) chan *raidman.Client {
 		backoff.Retry(connect, policy)
 	}()
 
-	return connChannel
+	return <-connChannel
 }
 
 func metricName(name string) string {
