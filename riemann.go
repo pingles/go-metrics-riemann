@@ -98,7 +98,7 @@ func RiemannConnect(host string) *raidman.Client {
 			}
 		}
 
-		policy := &backoff.ConstantBackOff{time.Second * 5}
+		policy := &backoff.ConstantBackOff{Interval: time.Second * 5}
 		backoff.Retry(connect, policy)
 	}()
 
