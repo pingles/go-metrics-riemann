@@ -2,13 +2,14 @@ package riemann
 
 import (
 	"fmt"
-	"github.com/amir/raidman"
-	"github.com/cenkalti/backoff"
-	"github.com/rcrowley/go-metrics"
 	"log"
 	"os"
 	"path"
 	"time"
+
+	"github.com/amir/raidman"
+	"github.com/cenkalti/backoff"
+	"github.com/rcrowley/go-metrics"
 )
 
 // Send all reported metrics to connected Riemann client
